@@ -1,0 +1,857 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>MEU Orfebre</title>
+  <link rel="icon" type="image/png" href="brand_assets/meu_logo_transparent.png">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;0,700;1,300;1,400;1,600;1,700&family=Lato:ital,wght@0,300;0,400;0,700;1,300;1,400&display=swap" rel="stylesheet" />
+
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+  <script>
+    (function() { emailjs.init("fdsEjMixxGwDHk-pL"); })();
+  </script>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            meu: {
+              dark:   '#4A2C17',
+              darker: '#2E1A0E',
+              mid:    '#7B4A28',
+              light:  '#A67C52',
+              beige:  '#F5ECD7',
+              cream:  '#FAF6EF',
+            }
+          },
+          fontFamily: {
+            display: ['"Cormorant Garamond"', 'Georgia', 'serif'],
+            sans:    ['Lato', '"Helvetica Neue"', 'sans-serif'],
+          }
+        }
+      }
+    }
+  </script>
+
+  <style>
+    html { scroll-behavior: smooth; }
+    *, *::before, *::after { box-sizing: border-box; }
+    body { overflow-x: hidden; }
+
+    body::after {
+      content: '';
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: 9998;
+      opacity: 0.028;
+      background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='300' height='300'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='300' height='300' filter='url(%23n)' opacity='1'/%3E%3C/svg%3E");
+    }
+
+    ::-webkit-scrollbar { width: 3px; }
+    ::-webkit-scrollbar-track { background: #FAF6EF; }
+    ::-webkit-scrollbar-thumb { background: #A67C52; border-radius: 2px; }
+    ::selection { background: #A67C52; color: #FAF6EF; }
+
+    .nav-link {
+      position: relative;
+      padding-bottom: 2px;
+    }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      bottom: 0; left: 0; right: 0;
+      height: 1px;
+      background: #A67C52;
+      transform: scaleX(0);
+      transform-origin: left;
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .nav-link:hover::after { transform: scaleX(1); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(22px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .au { animation: fadeUp 0.9s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+    .d1 { animation-delay: 0.1s; }
+    .d2 { animation-delay: 0.25s; }
+    .d3 { animation-delay: 0.42s; }
+    .d4 { animation-delay: 0.6s; }
+    .d5 { animation-delay: 0.78s; }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  transform 0.7s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .reveal.visible { opacity: 1; transform: translateY(0); }
+    .reveal-d1 { transition-delay: 0.08s; }
+    .reveal-d2 { transition-delay: 0.16s; }
+    .reveal-d3 { transition-delay: 0.24s; }
+    .reveal-d4 { transition-delay: 0.32s; }
+    .reveal-d5 { transition-delay: 0.40s; }
+    .reveal-d6 { transition-delay: 0.48s; }
+
+    .cta-primary {
+      display: inline-block;
+      background: #4A2C17;
+      color: #FAF6EF;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      cursor: pointer;
+      border: none;
+      transition: background 0.3s ease, transform 0.2s ease;
+    }
+    .cta-primary:hover { background: #7B4A28; transform: translateY(-2px); }
+    .cta-primary:active { transform: translateY(0); }
+    .cta-primary:focus-visible { outline: 2px solid #A67C52; outline-offset: 3px; }
+
+    .cta-outline {
+      display: inline-block;
+      border: 1px solid #A67C52;
+      color: #4A2C17;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      padding: 1rem 2rem;
+      text-decoration: none;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease;
+    }
+    .cta-outline:hover { background: #4A2C17; color: #FAF6EF; transform: translateY(-2px); }
+    .cta-outline:active { transform: translateY(0); }
+    .cta-outline:focus-visible { outline: 2px solid #A67C52; outline-offset: 3px; }
+
+    .cta-light {
+      display: inline-block;
+      border: 1px solid rgba(166,124,82,0.55);
+      color: #FAF6EF;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.72rem;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      padding: 1rem 2.5rem;
+      text-decoration: none;
+      background: transparent;
+      cursor: pointer;
+      transition: background 0.3s ease, color 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    }
+    .cta-light:hover {
+      background: #FAF6EF;
+      color: #4A2C17;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 30px rgba(250,246,239,0.12);
+    }
+    .cta-light:active { transform: translateY(0); }
+    .cta-light:focus-visible { outline: 2px solid #FAF6EF; outline-offset: 3px; }
+
+    .field-dark {
+      width: 100%;
+      background: rgba(245,236,215,0.05);
+      border: 1px solid rgba(166,124,82,0.25);
+      color: #FAF6EF;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      padding: 0.85rem 1.1rem;
+      outline: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      letter-spacing: 0.01em;
+    }
+    .field-dark::placeholder { color: rgba(250,246,239,0.28); }
+    .field-dark:focus { border-color: #A67C52; box-shadow: 0 0 0 1.5px rgba(166,124,82,0.4); }
+
+    .field-light {
+      width: 100%;
+      background: rgba(74,44,23,0.03);
+      border: 1px solid rgba(166,124,82,0.25);
+      color: #4A2C17;
+      font-family: 'Lato', sans-serif;
+      font-size: 0.88rem;
+      line-height: 1.7;
+      padding: 0.85rem 1.1rem;
+      outline: none;
+      transition: border-color 0.25s ease, box-shadow 0.25s ease;
+      letter-spacing: 0.01em;
+    }
+    .field-light::placeholder { color: rgba(74,44,23,0.3); }
+    .field-light:focus { border-color: #A67C52; box-shadow: 0 0 0 1.5px rgba(166,124,82,0.25); }
+
+    .carousel-track {
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+    }
+    .carousel-track::-webkit-scrollbar { display: none; }
+
+    .carousel-card {
+      transition: transform 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                  box-shadow 0.45s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .carousel-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 20px 40px rgba(74,44,23,0.14), 0 4px 12px rgba(74,44,23,0.07);
+    }
+    .carousel-card img {
+      transition: transform 0.65s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+    .carousel-card:hover img { transform: scale(1.05); }
+
+    .carousel-arrow {
+      width: 48px;
+      height: 48px;
+      border-radius: 50%;
+      background: rgba(250,246,239,0.92);
+      border: 1px solid rgba(166,124,82,0.2);
+      color: #4A2C17;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: background 0.25s ease, transform 0.2s ease, box-shadow 0.25s ease;
+      box-shadow: 0 4px 16px rgba(74,44,23,0.08);
+    }
+    .carousel-arrow:hover {
+      background: #FAF6EF;
+      transform: scale(1.08);
+      box-shadow: 0 6px 24px rgba(74,44,23,0.12);
+    }
+    .carousel-arrow:active { transform: scale(1); }
+    .carousel-arrow:focus-visible { outline: 2px solid #A67C52; outline-offset: 2px; }
+
+    .video-placeholder {
+      position: relative;
+      overflow: hidden;
+      cursor: pointer;
+    }
+    .video-placeholder .play-btn {
+      transition: transform 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94), opacity 0.3s ease;
+    }
+    .video-placeholder:hover .play-btn {
+      transform: translate(-50%, -50%) scale(1.1);
+      opacity: 1;
+    }
+
+    @keyframes subtlePulse {
+      0%, 100% { opacity: 1; }
+      50% { opacity: 0.7; }
+    }
+    .pulse-subtle { animation: subtlePulse 2.5s ease-in-out infinite; }
+
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(16px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .slide-up { animation: slideUp 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94) both; }
+
+    .credential-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      padding: 0.5rem 1rem;
+      border: 1px solid rgba(166,124,82,0.2);
+      font-family: 'Lato', sans-serif;
+      font-size: 0.75rem;
+      letter-spacing: 0.06em;
+      color: #7B4A28;
+    }
+  </style>
+</head>
+
+<body class="bg-meu-cream font-sans text-meu-dark">
+
+<!-- ══════════════════════════════════════════════
+     NAV
+══════════════════════════════════════════════ -->
+<nav id="nav" class="fixed top-0 left-0 right-0 z-50 bg-meu-cream/96 backdrop-blur-sm" style="border-bottom: 1px solid rgba(166,124,82,0.18); transition: box-shadow 0.3s ease;">
+  <div class="max-w-7xl mx-auto px-6 lg:px-14 h-16 flex items-center justify-between">
+    <a href="#" class="no-underline font-display text-meu-dark" style="font-size: 1.1rem; font-weight: 600; letter-spacing: 0.04em; text-decoration: none;">MEU <span style="font-weight: 300; font-style: italic;">orfebre</span></a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#la-fragua" class="nav-link font-sans text-meu-mid" style="font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;">Academy</a>
+      <a href="#gallery"   class="nav-link font-sans text-meu-mid" style="font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;">Gallery</a>
+      <a href="#custom"    class="nav-link font-sans text-meu-mid" style="font-size: 0.68rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;">Custom</a>
+      <a href="https://instagram.com/meu.orfebre" target="_blank" class="font-display italic text-meu-light" style="font-size: 0.92rem; font-weight: 300; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='#7B4A28'" onmouseout="this.style.color='#A67C52'">@meu.orfebre</a>
+    </div>
+    <button id="menu-toggle" class="md:hidden p-2 text-meu-dark" aria-label="Menu">
+      <svg width="22" height="16" viewBox="0 0 22 16" fill="none">
+        <rect y="0"  width="22" height="1.5" rx="0.75" fill="#4A2C17"/>
+        <rect y="7"  width="22" height="1.5" rx="0.75" fill="#4A2C17"/>
+        <rect y="14" width="22" height="1.5" rx="0.75" fill="#4A2C17"/>
+      </svg>
+    </button>
+  </div>
+  <div id="mobile-menu" class="hidden md:hidden bg-meu-cream border-t px-6 py-5 flex flex-col gap-5" style="border-color: rgba(166,124,82,0.15);">
+    <a href="#la-fragua" class="font-sans text-meu-mid" style="font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;" onclick="closeMobile()">Academy</a>
+    <a href="#gallery"   class="font-sans text-meu-mid" style="font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;" onclick="closeMobile()">Gallery</a>
+    <a href="#custom"    class="font-sans text-meu-mid" style="font-size: 0.72rem; letter-spacing: 0.16em; text-transform: uppercase; text-decoration: none;" onclick="closeMobile()">Custom</a>
+    <a href="https://instagram.com/meu.orfebre" target="_blank" class="font-display italic text-meu-light" style="font-size: 0.95rem; text-decoration: none;">@meu.orfebre</a>
+  </div>
+</nav>
+
+
+<!-- ══════════════════════════════════════════════
+     HERO — ACADEMY
+══════════════════════════════════════════════ -->
+<section id="la-fragua" class="relative min-h-screen flex items-center overflow-hidden bg-meu-beige" style="padding-top: 5rem; padding-bottom: 5rem;">
+  <div class="absolute inset-0 pointer-events-none" style="
+    background:
+      radial-gradient(ellipse 75% 65% at 50% 70%, rgba(166,124,82,0.07) 0%, transparent 65%),
+      radial-gradient(ellipse 35% 35% at 15% 25%, rgba(123,74,40,0.04) 0%, transparent 55%),
+      radial-gradient(ellipse 30% 30% at 85% 15%, rgba(74,44,23,0.03) 0%, transparent 50%);
+  "></div>
+
+  <div class="relative z-10 w-full max-w-6xl mx-auto px-6 lg:px-14">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-20 items-center">
+
+      <!-- LEFT — Header + Logo + CTA -->
+      <div class="text-center lg:text-left">
+        <div class="au d1 mb-3 flex justify-center lg:justify-start">
+          <img src="brand_assets/meu_logo_transparent.png" alt="MEU Orfebre" style="height: clamp(80px, 18vw, 120px); width: auto;" />
+        </div>
+
+        <p class="au d1 font-sans text-meu-light mb-2" style="font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase;">Welcome to</p>
+        <h1 class="au d2 font-display font-bold text-meu-dark" style="font-size: clamp(2.8rem, 7vw, 4.5rem); letter-spacing: -0.03em; line-height: 0.95;">
+          MEU Academy
+        </h1>
+
+        <div class="au d3 flex items-center gap-5 my-4 justify-center lg:justify-start">
+          <div style="width: 55px; height: 1px; background: rgba(166,124,82,0.55);"></div>
+          <span style="color: #A67C52; font-size: 0.45rem;">&#9670;</span>
+          <div style="width: 55px; height: 1px; background: rgba(166,124,82,0.55);"></div>
+        </div>
+
+        <p class="au d3 font-sans text-meu-mid mx-auto lg:mx-0" style="font-size: 0.88rem; line-height: 1.8; max-width: 400px; opacity: 0.85;">
+          A 90-minute hands-on jewelry workshop. We provide all the tools &amp; materials &mdash; you leave wearing a fully customized piece made by your own hands.
+        </p>
+
+        <div class="au d4 mt-7 flex justify-center lg:justify-start">
+          <a href="#waitlist-section" class="cta-primary">Join the Waitlist</a>
+        </div>
+
+        <div class="au d5 mt-5 flex flex-col gap-2 items-center lg:items-start">
+          <div class="flex items-center gap-3">
+            <svg width="16" height="16" viewBox="0 0 20 20" fill="none">
+              <rect x="2" y="4" width="16" height="14" rx="2" stroke="#A67C52" stroke-width="1.5" fill="none"/>
+              <path d="M6 2v4M14 2v4" stroke="#A67C52" stroke-width="1.5" stroke-linecap="round"/>
+              <rect x="5" y="9" width="3" height="2" rx="0.5" fill="#A67C52" opacity="0.5"/>
+              <rect x="9" y="9" width="3" height="2" rx="0.5" fill="#A67C52" opacity="0.5"/>
+            </svg>
+            <span class="font-sans text-meu-mid" style="font-size: 0.75rem; letter-spacing: 0.08em;">Coming this Summer</span>
+          </div>
+          <div class="flex items-center gap-2 pulse-subtle">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #A67C52;"></span>
+            <span class="font-sans text-meu-light" style="font-size: 0.65rem; letter-spacing: 0.14em; text-transform: uppercase;">Limited Spots</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT — Benefits list -->
+      <div class="au d4">
+        <p class="font-sans text-meu-light mb-8 text-center lg:text-left" style="font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase;">What You Get</p>
+
+        <div class="flex flex-col gap-7">
+          <div class="flex items-start gap-5">
+            <div class="shrink-0 flex items-center justify-center" style="width: 52px; height: 52px; background: rgba(166,124,82,0.08); border-radius: 14px;">
+              <!-- Flame + anvil illustration -->
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                <path d="M16 4c0 0-6 5-6 12a6 6 0 0 0 12 0C22 9 16 4 16 4z" fill="#E8734A" opacity="0.85"/>
+                <path d="M16 10c0 0-3 3-3 7a3 3 0 0 0 6 0c0-4-3-7-3-7z" fill="#F5B041" opacity="0.9"/>
+                <rect x="8" y="24" width="16" height="3" rx="1" fill="#7B4A28"/>
+                <rect x="6" y="27" width="20" height="2" rx="1" fill="#4A2C17" opacity="0.6"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-display font-bold text-meu-dark mb-1" style="font-size: 1.05rem; letter-spacing: -0.01em;">Learn Real Goldsmithing</h3>
+              <p class="font-sans text-meu-mid" style="font-size: 0.8rem; line-height: 1.7; opacity: 0.7;">Hands-on techniques taught by a certified goldsmith with 10+ years of experience.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-5">
+            <div class="shrink-0 flex items-center justify-center" style="width: 52px; height: 52px; background: rgba(78,172,174,0.08); border-radius: 14px;">
+              <!-- Gems + tools illustration -->
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                <path d="M10 8l6-4 6 4-6 8-6-8z" fill="#4EACAE" opacity="0.75"/>
+                <path d="M16 4l6 4H10l6-4z" fill="#6EC8CA" opacity="0.6"/>
+                <path d="M16 12l-6-4v0l6 8 6-8v0l-6 4z" fill="#3D8E90" opacity="0.5"/>
+                <circle cx="8" cy="22" r="3" fill="#E8734A" opacity="0.6"/>
+                <circle cx="16" cy="24" r="2.5" fill="#A67C52" opacity="0.7"/>
+                <circle cx="23" cy="21" r="3.5" fill="#F5B041" opacity="0.55"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-display font-bold text-meu-dark mb-1" style="font-size: 1.05rem; letter-spacing: -0.01em;">All Tools &amp; Materials Provided</h3>
+              <p class="font-sans text-meu-mid" style="font-size: 0.8rem; line-height: 1.7; opacity: 0.7;">Professional workspace, metals, stones, findings &mdash; everything you need is here.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-5">
+            <div class="shrink-0 flex items-center justify-center" style="width: 52px; height: 52px; background: rgba(245,176,65,0.1); border-radius: 14px;">
+              <!-- Ring / jewelry piece illustration -->
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                <ellipse cx="16" cy="18" rx="9" ry="9" fill="none" stroke="#C8963E" stroke-width="2.5" opacity="0.7"/>
+                <ellipse cx="16" cy="18" rx="6" ry="6" fill="none" stroke="#F5B041" stroke-width="1.5" opacity="0.45"/>
+                <circle cx="16" cy="9" r="4" fill="#E8734A" opacity="0.75"/>
+                <circle cx="16" cy="9" r="2" fill="#F5D76E" opacity="0.85"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-display font-bold text-meu-dark mb-1" style="font-size: 1.05rem; letter-spacing: -0.01em;">Leave with Your Own Piece</h3>
+              <p class="font-sans text-meu-mid" style="font-size: 0.8rem; line-height: 1.7; opacity: 0.7;">Walk out wearing a one-of-a-kind piece you designed and crafted yourself.</p>
+            </div>
+          </div>
+
+          <div class="flex items-start gap-5">
+            <div class="shrink-0 flex items-center justify-center" style="width: 52px; height: 52px; background: rgba(232,115,74,0.08); border-radius: 14px;">
+              <!-- People / community illustration -->
+              <svg width="28" height="28" viewBox="0 0 32 32" fill="none">
+                <circle cx="11" cy="10" r="4" fill="#E8734A" opacity="0.65"/>
+                <circle cx="21" cy="10" r="4" fill="#4EACAE" opacity="0.65"/>
+                <path d="M4 26c0-4.5 3.5-8 7-8s7 3.5 7 8" fill="#E8734A" opacity="0.3"/>
+                <path d="M14 26c0-4.5 3.5-8 7-8s7 3.5 7 8" fill="#4EACAE" opacity="0.3"/>
+                <circle cx="16" cy="19" r="2" fill="#F5B041" opacity="0.8"/>
+              </svg>
+            </div>
+            <div>
+              <h3 class="font-display font-bold text-meu-dark mb-1" style="font-size: 1.05rem; letter-spacing: -0.01em;">Connect &amp; Create Together</h3>
+              <p class="font-sans text-meu-mid" style="font-size: 0.8rem; line-height: 1.7; opacity: 0.7;">A space for women to share stories, inspire each other, and bond through art.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <div class="au d5 absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2.5">
+    <p class="font-sans text-meu-light" style="font-size: 0.58rem; letter-spacing: 0.24em; text-transform: uppercase;">Scroll</p>
+    <div style="width: 1px; height: 44px; background: linear-gradient(to bottom, rgba(166,124,82,0.7), transparent);"></div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     2. PROFILE — MEET MARÍA
+══════════════════════════════════════════════ -->
+<section class="relative py-24 px-6 overflow-hidden" style="background: #4A2C17;">
+  <div class="absolute inset-0 pointer-events-none" style="
+    background:
+      radial-gradient(ellipse 60% 50% at 50% 0%, rgba(46,26,14,0.6) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 40% at 90% 80%, rgba(123,74,40,0.15) 0%, transparent 55%);
+  "></div>
+
+  <div class="relative z-10 max-w-5xl mx-auto">
+    <div class="reveal">
+      <p class="font-sans text-meu-light mb-10 text-center" style="font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.75;">Your Guide</p>
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-center">
+        <div class="relative mx-auto lg:mx-0" style="max-width: 380px; width: 100%;">
+          <div class="relative overflow-hidden" style="aspect-ratio: 3/4;">
+            <img src="content/profile.jpeg" alt="Mar&iacute;a Eugenia Melet" class="w-full h-full object-cover" />
+            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(74,44,23,0.4) 0%, transparent 50%); mix-blend-mode: multiply;"></div>
+          </div>
+          <div class="absolute -bottom-3 -right-3 w-24 h-24" style="border: 1px solid rgba(166,124,82,0.25); pointer-events: none;"></div>
+          <div class="absolute" style="bottom: -20px; right: -20px; width: 130px; height: 130px; border-radius: 50%; overflow: hidden; border: 3px solid rgba(245,236,215,0.9); box-shadow: 0 6px 24px rgba(46,26,14,0.4);">
+            <img src="content/face.jpeg" alt="Mar&iacute;a Eugenia" class="w-full h-full object-cover" />
+          </div>
+        </div>
+
+        <div>
+          <h3 class="font-display font-bold text-meu-cream mb-1" style="font-size: clamp(1.8rem, 4vw, 2.5rem); letter-spacing: -0.02em; line-height: 1.1;">Mar&iacute;a Eugenia Melet</h3>
+          <p class="font-display italic text-meu-light font-light mb-6" style="font-size: 1.05rem; opacity: 0.75;">Founder &amp; Goldsmith</p>
+
+          <p class="font-sans text-meu-beige/75 mb-6" style="font-size: 0.88rem; line-height: 1.85;">
+            Born in Venezuela, Mar&iacute;a Eugenia has spent over a decade mastering the art of goldsmithing. Every piece she creates, and every workshop she leads, is an invitation to see the world through her eyes.
+          </p>
+
+          <blockquote class="font-display italic text-meu-beige font-light mb-8" style="font-size: 1.1rem; line-height: 1.75; opacity: 0.78; border-left: 2px solid rgba(166,124,82,0.3); padding-left: 1.25rem;">
+            &ldquo;Creating jewelry is not just my craft &mdash; it is my way of connecting with others through art.&rdquo;
+          </blockquote>
+
+          <div class="flex flex-wrap gap-3">
+            <span class="credential-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A67C52" stroke-width="1.5"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+              Diploma of Goldsmith
+            </span>
+            <span class="credential-badge">
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#A67C52" stroke-width="1.5"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+              10+ Years of Experience
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     3. WAITLIST
+══════════════════════════════════════════════ -->
+<section class="relative py-24 px-6 overflow-hidden bg-meu-beige" id="waitlist-section">
+  <div class="relative z-10 max-w-5xl mx-auto">
+    <div class="reveal">
+      <div style="border: 1px solid rgba(166,124,82,0.2); padding: 3rem 2rem; background: rgba(74,44,23,0.02);">
+        <div class="text-center mb-8">
+          <div class="inline-flex items-center gap-2 mb-5 pulse-subtle" style="border: 1px solid rgba(166,124,82,0.3); padding: 0.4rem 1rem;">
+            <span style="width: 6px; height: 6px; border-radius: 50%; background: #A67C52;"></span>
+            <span class="font-sans text-meu-mid" style="font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;">Limited Spots Available</span>
+          </div>
+          <h3 class="font-display font-bold text-meu-dark mb-3" style="font-size: clamp(1.6rem, 4vw, 2.2rem); letter-spacing: -0.02em;">Be the First to Know</h3>
+          <p class="font-display italic text-meu-mid font-light mx-auto" style="font-size: 1rem; line-height: 1.7; max-width: 420px; opacity: 0.7;">
+            Join the waitlist and we&rsquo;ll let you know the moment doors open.
+          </p>
+        </div>
+
+        <div id="waitlist-form" class="max-w-lg mx-auto">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-4">
+            <input id="wl-name" type="text" class="field-light" placeholder="Your name" />
+            <input id="wl-email" type="email" class="field-light" placeholder="Email address" />
+          </div>
+          <input id="wl-ig" type="text" class="field-light mb-6" placeholder="Instagram handle (optional)" />
+          <div class="flex flex-col sm:flex-row items-center gap-5">
+            <button onclick="submitWaitlist()" class="cta-primary" style="white-space: nowrap;">Join the Waitlist</button>
+            <p class="font-sans text-meu-mid/50 text-center sm:text-left" style="font-size: 0.76rem; line-height: 1.6;">
+              No commitment &mdash; we&rsquo;ll only reach out when it&rsquo;s time.
+            </p>
+          </div>
+        </div>
+
+        <div id="waitlist-success" class="hidden max-w-lg mx-auto text-center py-6">
+          <div class="flex items-center justify-center w-16 h-16 mx-auto mb-5" style="border: 1.5px solid rgba(166,124,82,0.4); border-radius: 50%;">
+            <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="#A67C52" stroke-width="1.5"><polyline points="20 6 9 17 4 12"/></svg>
+          </div>
+          <h4 class="font-display font-bold text-meu-dark mb-2" style="font-size: 1.6rem; letter-spacing: -0.01em;">You&rsquo;re on the list</h4>
+          <p class="font-display italic text-meu-mid font-light" style="font-size: 1rem; opacity: 0.7; line-height: 1.6;">
+            We&rsquo;ll reach out soon with all the details.<br>Get ready to create something beautiful.
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     4. GALLERY
+══════════════════════════════════════════════ -->
+<section id="gallery" class="bg-meu-cream py-16 px-6">
+  <div class="max-w-5xl mx-auto">
+
+    <div class="text-center mb-10">
+      <p class="reveal font-sans text-meu-light mb-2" style="font-size: 0.62rem; letter-spacing: 0.26em; text-transform: uppercase;">The Work</p>
+      <h2 class="reveal reveal-d1 font-display font-bold text-meu-dark" style="font-size: clamp(1.8rem, 5vw, 2.8rem); letter-spacing: -0.025em; line-height: 1;">Pieces Born from Fire</h2>
+    </div>
+
+    <!-- Carousel -->
+    <div class="reveal relative">
+      <div class="absolute left-0 top-0 bottom-0 w-10 sm:w-14 z-10 pointer-events-none" style="background: linear-gradient(to right, #FAF6EF, transparent);"></div>
+      <div class="absolute right-0 top-0 bottom-0 w-10 sm:w-14 z-10 pointer-events-none" style="background: linear-gradient(to left, #FAF6EF, transparent);"></div>
+
+      <div id="carousel" class="carousel-track flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth px-6 sm:px-12 py-3">
+        <div class="carousel-card snap-start shrink-0" style="width: 200px;">
+          <div class="relative overflow-hidden bg-white" style="aspect-ratio: 4/5; box-shadow: 0 4px 20px rgba(74,44,23,0.06), 0 1px 3px rgba(74,44,23,0.03);">
+            <img src="content/collar.jpeg" alt="Collar artesanal" class="w-full h-full object-cover" />
+            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(74,44,23,0.35) 0%, transparent 45%);"></div>
+          </div>
+        </div>
+        <div class="carousel-card snap-start shrink-0" style="width: 200px;">
+          <div class="relative overflow-hidden bg-white" style="aspect-ratio: 4/5; box-shadow: 0 4px 20px rgba(74,44,23,0.06), 0 1px 3px rgba(74,44,23,0.03);">
+            <img src="content/anillo.jpeg" alt="Anillo artesanal" class="w-full h-full object-cover" />
+            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(74,44,23,0.35) 0%, transparent 45%);"></div>
+          </div>
+        </div>
+        <div class="carousel-card snap-start shrink-0" style="width: 200px;">
+          <div class="relative overflow-hidden bg-white" style="aspect-ratio: 4/5; box-shadow: 0 4px 20px rgba(74,44,23,0.06), 0 1px 3px rgba(74,44,23,0.03);">
+            <img src="content/collar 2.jpeg" alt="Collar artesanal" class="w-full h-full object-cover" />
+            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(74,44,23,0.35) 0%, transparent 45%);"></div>
+          </div>
+        </div>
+        <div class="carousel-card snap-start shrink-0" style="width: 200px;">
+          <div class="relative overflow-hidden bg-white" style="aspect-ratio: 4/5; box-shadow: 0 4px 20px rgba(74,44,23,0.06), 0 1px 3px rgba(74,44,23,0.03);">
+            <img src="content/image 1.png" alt="Pieza artesanal" class="w-full h-full object-cover" />
+            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(74,44,23,0.35) 0%, transparent 45%);"></div>
+          </div>
+        </div>
+        <div class="carousel-card snap-start shrink-0" style="width: 200px;">
+          <div class="relative overflow-hidden bg-white" style="aspect-ratio: 4/5; box-shadow: 0 4px 20px rgba(74,44,23,0.06), 0 1px 3px rgba(74,44,23,0.03);">
+            <img src="content/image 2.png" alt="Pieza artesanal" class="w-full h-full object-cover" />
+            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(74,44,23,0.35) 0%, transparent 45%);"></div>
+          </div>
+        </div>
+        <div class="carousel-card snap-start shrink-0" style="width: 200px;">
+          <div class="relative overflow-hidden bg-white" style="aspect-ratio: 4/5; box-shadow: 0 4px 20px rgba(74,44,23,0.06), 0 1px 3px rgba(74,44,23,0.03);">
+            <img src="content/image 3.png" alt="Pieza artesanal" class="w-full h-full object-cover" />
+            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(74,44,23,0.35) 0%, transparent 45%);"></div>
+          </div>
+        </div>
+        <div class="carousel-card snap-start shrink-0" style="width: 200px;">
+          <div class="relative overflow-hidden bg-white" style="aspect-ratio: 4/5; box-shadow: 0 4px 20px rgba(74,44,23,0.06), 0 1px 3px rgba(74,44,23,0.03);">
+            <img src="content/image 4.png" alt="Pieza artesanal" class="w-full h-full object-cover" />
+            <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(74,44,23,0.35) 0%, transparent 45%);"></div>
+          </div>
+        </div>
+      </div>
+
+      <button onclick="scrollCarousel(-1)" class="carousel-arrow absolute left-1 sm:left-2 top-1/2 -translate-y-1/2 z-20" style="width: 40px; height: 40px;" aria-label="Previous">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A2C17" stroke-width="1.5"><polyline points="15 18 9 12 15 6"/></svg>
+      </button>
+      <button onclick="scrollCarousel(1)" class="carousel-arrow absolute right-1 sm:right-2 top-1/2 -translate-y-1/2 z-20" style="width: 40px; height: 40px;" aria-label="Next">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#4A2C17" stroke-width="1.5"><polyline points="9 18 15 12 9 6"/></svg>
+      </button>
+    </div>
+
+    <div class="reveal text-center mt-8">
+      <a href="https://instagram.com/meu.orfebre" target="_blank" class="font-display italic text-meu-mid font-light" style="font-size: 0.95rem; border-bottom: 1px solid rgba(166,124,82,0.55); padding-bottom: 2px; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='#4A2C17'" onmouseout="this.style.color='#7B4A28'">
+        See more on Instagram &nbsp;&rarr;
+      </a>
+    </div>
+
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     5. VIDEO + CUSTOM PIECES (side by side)
+══════════════════════════════════════════════ -->
+<section id="custom" class="relative py-24 px-6 overflow-hidden" style="background: #4A2C17;">
+  <div class="absolute inset-0 pointer-events-none" style="
+    background:
+      radial-gradient(ellipse 50% 50% at 20% 80%, rgba(123,74,40,0.12) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 80% 20%, rgba(46,26,14,0.4) 0%, transparent 55%);
+  "></div>
+
+  <div class="relative z-10 max-w-6xl mx-auto">
+    <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-16 items-start">
+
+      <!-- LEFT — Video -->
+      <div class="reveal" style="max-width: 380px; width: 100%; margin: 0 auto;">
+        <p class="font-sans text-meu-light mb-6" style="font-size: 0.62rem; letter-spacing: 0.22em; text-transform: uppercase; opacity: 0.75;">Watch Mar&iacute;a at Work</p>
+        <div class="relative" style="background: #2E1A0E; border-radius: 4px; overflow: hidden; box-shadow: 0 12px 40px rgba(46,26,14,0.5); aspect-ratio: 3/4;">
+          <video id="hero-video" playsinline muted loop preload="metadata" style="width: 100%; height: 100%; object-fit: cover; display: block;">
+            <source src="content/video.mp4" type="video/mp4" />
+            Your browser does not support the video tag.
+          </video>
+        </div>
+      </div>
+
+      <!-- RIGHT — Custom Piece Request -->
+      <div class="reveal reveal-d2">
+        <h3 class="font-display font-bold text-meu-cream mb-3" style="font-size: clamp(1.6rem, 4vw, 2.2rem); letter-spacing: -0.02em; line-height: 1.1;">Want Mar&iacute;a to create a piece for you?</h3>
+        <p class="font-display italic text-meu-beige font-light mb-6" style="font-size: 0.95rem; line-height: 1.7; opacity: 0.7;">
+          Drop your idea below &mdash; describe what you&rsquo;re imagining and she&rsquo;ll make it happen.
+        </p>
+
+        <textarea
+          id="custom-vision"
+          class="field-dark"
+          rows="5"
+          style="font-style: italic; color: rgba(250,246,239,0.35); font-size: 0.88rem; line-height: 1.8;"
+          onfocus="if(this.value===this.defaultValue){this.value='';this.style.color='#FAF6EF';this.style.fontStyle='normal';}"
+          onblur="if(this.value===''){this.value=this.defaultValue;this.style.color='rgba(250,246,239,0.35)';this.style.fontStyle='italic';}"
+        >I'm imagining earrings for my mother's birthday — she loves bold, joyful color and something that feels like summer in Caracas. Maybe turquoise and gold, something that dances when she moves...</textarea>
+
+        <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mt-4">
+          <input id="custom-name" type="text" class="field-dark" placeholder="Your name" />
+          <input id="custom-contact" type="text" class="field-dark" placeholder="Instagram handle or email" />
+        </div>
+
+        <div class="mt-6">
+          <button onclick="sendCustomRequest()" class="cta-light">Send to Mar&iacute;a Eugenia</button>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+
+<!-- ══════════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════════ -->
+<footer style="background: #2E1A0E;" class="py-16 px-6 text-center">
+  <div class="max-w-md mx-auto">
+    <div class="flex items-center justify-center gap-5 mb-7">
+      <div style="width: 45px; height: 1px; background: rgba(166,124,82,0.25);"></div>
+      <span style="color: rgba(166,124,82,0.45); font-size: 0.4rem;">&#9670;</span>
+      <div style="width: 45px; height: 1px; background: rgba(166,124,82,0.25);"></div>
+    </div>
+    <div class="flex items-baseline justify-center gap-2 mb-1.5">
+      <span class="font-display font-bold text-meu-cream" style="font-size: 1.7rem; letter-spacing: -0.025em;">MEU</span>
+      <span class="font-display italic text-meu-light font-light" style="font-size: 1.25rem; letter-spacing: 0.04em;">orfebre</span>
+    </div>
+    <p class="font-display italic text-meu-light/50 mb-7" style="font-size: 0.88rem; font-weight: 300;">Crafted with Soul &mdash; Venezuela</p>
+    <a href="https://instagram.com/meu.orfebre" target="_blank" class="font-sans text-meu-light/60" style="font-size: 0.78rem; letter-spacing: 0.12em; text-decoration: none; transition: color 0.2s ease;" onmouseover="this.style.color='rgba(166,124,82,0.9)'" onmouseout="this.style.color='rgba(166,124,82,0.6)'">
+      @meu.orfebre
+    </a>
+    <p class="font-sans text-meu-light/25 mt-10" style="font-size: 0.65rem; letter-spacing: 0.06em;">
+      &copy; 2025 MEU Orfebre &mdash; Mar&iacute;a Eugenia Melet. All rights reserved.
+    </p>
+  </div>
+</footer>
+
+
+<!-- ══════════════════════════════════════════════
+     SCRIPTS
+══════════════════════════════════════════════ -->
+<script>
+  // Nav shadow on scroll
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => {
+    nav.style.boxShadow = window.scrollY > 40
+      ? '0 2px 24px rgba(74,44,23,0.09)'
+      : 'none';
+  }, { passive: true });
+
+  // Mobile menu
+  document.getElementById('menu-toggle').addEventListener('click', () => {
+    document.getElementById('mobile-menu').classList.toggle('hidden');
+  });
+  function closeMobile() {
+    document.getElementById('mobile-menu').classList.add('hidden');
+  }
+
+  // Gallery carousel
+  function scrollCarousel(dir) {
+    const carousel = document.getElementById('carousel');
+    carousel.scrollBy({ left: dir * 220, behavior: 'smooth' });
+  }
+
+  // Auto-scroll carousel
+  (function() {
+    const carousel = document.getElementById('carousel');
+    let autoTimer = setInterval(autoAdvance, 3000);
+
+    function autoAdvance() {
+      const maxScroll = carousel.scrollWidth - carousel.clientWidth;
+      if (carousel.scrollLeft >= maxScroll - 10) {
+        carousel.scrollTo({ left: 0, behavior: 'smooth' });
+      } else {
+        carousel.scrollBy({ left: 220, behavior: 'smooth' });
+      }
+    }
+
+    carousel.addEventListener('pointerdown', () => clearInterval(autoTimer));
+    carousel.addEventListener('pointerup', () => { autoTimer = setInterval(autoAdvance, 3000); });
+    carousel.addEventListener('mouseenter', () => clearInterval(autoTimer));
+    carousel.addEventListener('mouseleave', () => { autoTimer = setInterval(autoAdvance, 3000); });
+  })();
+
+  // Waitlist submit
+  function submitWaitlist() {
+    const name  = document.getElementById('wl-name').value.trim();
+    const email = document.getElementById('wl-email').value.trim();
+    const ig    = document.getElementById('wl-ig').value.trim();
+
+    if (!name || !email) {
+      alert('Please enter your name and email.');
+      return;
+    }
+
+    const btn = document.querySelector('#waitlist-form .cta-primary');
+    btn.textContent = 'Sending...';
+    btn.style.pointerEvents = 'none';
+    btn.style.opacity = '0.6';
+
+    emailjs.send('service_ofh3ybs', 'template_u1gic2e', {
+      name: name,
+      email: email,
+      instagram: ig || 'Not provided',
+      title: name,
+      message: 'Name: ' + name + '\nEmail: ' + email + '\nInstagram: ' + (ig || 'Not provided'),
+      time: new Date().toLocaleString()
+    }).then(function() {
+      document.getElementById('waitlist-form').classList.add('hidden');
+      const success = document.getElementById('waitlist-success');
+      success.classList.remove('hidden');
+      success.classList.add('slide-up');
+    }, function(err) {
+      btn.textContent = 'Join the Waitlist';
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+      alert('Something went wrong — please try again.');
+      console.error('EmailJS error:', err);
+    });
+  }
+
+  // Custom piece request → Email
+  function sendCustomRequest() {
+    const el = document.getElementById('custom-vision');
+    const vision = (el.value === el.defaultValue) ? '' : el.value.trim();
+    const name = document.getElementById('custom-name').value.trim();
+    const contact = document.getElementById('custom-contact').value.trim();
+
+    if (!vision) { alert('Please describe what you have in mind.'); return; }
+
+    const btn = document.querySelector('#custom .cta-light');
+    btn.textContent = 'Sending...';
+    btn.style.pointerEvents = 'none';
+    btn.style.opacity = '0.6';
+
+    emailjs.send('service_ofh3ybs', 'template_9nyrlrj', {
+      name: name || 'Anonymous',
+      contact: contact || 'Not provided',
+      message: vision,
+      title: name || 'Someone',
+      email: contact,
+      time: new Date().toLocaleString()
+    }).then(function() {
+      btn.textContent = 'Sent!';
+      btn.style.opacity = '1';
+      el.value = 'Thank you! María Eugenia will get back to you soon.';
+      el.style.color = 'rgba(250,246,239,0.6)';
+      el.style.fontStyle = 'italic';
+      document.getElementById('custom-name').value = '';
+      document.getElementById('custom-contact').value = '';
+      setTimeout(function() {
+        btn.textContent = 'Send to María Eugenia';
+        btn.style.pointerEvents = '';
+        el.value = el.defaultValue;
+        el.style.color = 'rgba(250,246,239,0.35)';
+      }, 4000);
+    }, function(err) {
+      btn.textContent = 'Send to María Eugenia';
+      btn.style.pointerEvents = '';
+      btn.style.opacity = '';
+      alert('Something went wrong — please try again.');
+      console.error('EmailJS error:', err);
+    });
+  }
+
+  // Video autoplay on scroll
+  const heroVideo = document.getElementById('hero-video');
+  const videoObserver = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        heroVideo.play();
+      } else {
+        heroVideo.pause();
+      }
+    });
+  }, { threshold: 0.3 });
+  videoObserver.observe(heroVideo);
+
+  // Scroll reveal
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach(e => {
+      if (e.isIntersecting) {
+        e.target.classList.add('visible');
+        observer.unobserve(e.target);
+      }
+    });
+  }, { threshold: 0.12 });
+  document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+</script>
+
+</body>
+</html>
